@@ -508,9 +508,8 @@ namespace MLAPI
                     for (int i = 0; i < NetworkManager.Singleton.ConnectedClientsList.Count; i++)
                     {
                         var client = NetworkManager.Singleton.ConnectedClientsList[i];
-                        var spawnedObjs = NetworkManager.Singleton.SpawnManager.SpawnedObjectsList;
-                        s_Touched.UnionWith(spawnedObjs);
-                        foreach (var sobj in spawnedObjs)
+                        MLAPI.NetworkManager.Singleton.ReplicationManager.QueryFor(client, s_Touched);
+                        foreach (var sobj in s_Touched)
                         {
                             // Sync just the variables for just the objects this client sees
                             for (int k = 0; k < sobj.ChildNetworkBehaviours.Count; k++)

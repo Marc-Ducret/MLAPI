@@ -20,6 +20,7 @@ using MLAPI.Spawning;
 using MLAPI.Exceptions;
 using MLAPI.Transports.Tasks;
 using MLAPI.Messaging.Buffering;
+using MLAPI.AOI;
 using Unity.Profiling;
 
 namespace MLAPI
@@ -200,6 +201,23 @@ namespace MLAPI
         public string ConnectedHostname { get; private set; }
 
         internal static event Action OnSingletonReady;
+
+        private ReplicationManager<NetworkClient, NetworkObject>  m_ReplicationManager;
+        public List<ReplicationGroup> ReplicationGroups;// = new List<ReplicationGroup>();
+        public ReplicationManager<NetworkClient, NetworkObject> ReplicationManager
+        {
+            get
+            {
+                if (m_ReplicationManager == null)
+                {
+                    m_ReplicationManager = new ReplicationManager<NetworkClient, NetworkObject>();
+//                    m_ReplicationManager.GetAllObjects = (HashSet<NetworkObject> results) => results.UnionWith(SpawnManager.SpawnedObjectsList);
+                    m_ReplicationManager.Bypass = true;
+                }
+
+                return m_ReplicationManager;
+            }
+        }
 
         private void OnValidate()
         {
@@ -525,6 +543,12 @@ namespace MLAPI
             NetworkConfig.NetworkTransport.DisconnectLocalClient();
             IsConnectedClient = false;
             Shutdown();
+        }
+
+        public void ToggleClientObjectMap()
+        {
+            if (NetworkLog.CurrentLogLevel <= LogLevel.Developer) NetworkLog.LogInfo("ToggleClientObjectMap()");
+            Singleton.ReplicationManager.Bypass = !Singleton.ReplicationManager.Bypass;
         }
 
         /// <summary>

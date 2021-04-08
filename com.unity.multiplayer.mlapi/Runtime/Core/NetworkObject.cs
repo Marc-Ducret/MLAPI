@@ -9,6 +9,7 @@ using MLAPI.Messaging;
 using MLAPI.Serialization.Pooled;
 using MLAPI.Spawning;
 using MLAPI.Transports;
+using MLAPI.AOI;
 using UnityEngine;
 
 namespace MLAPI
@@ -18,8 +19,15 @@ namespace MLAPI
     /// </summary>
     [AddComponentMenu("MLAPI/NetworkObject", -99)]
     [DisallowMultipleComponent]
-    public sealed class NetworkObject : MonoBehaviour
+    public sealed class NetworkObject : MonoBehaviour, IReplicateable
     {
+
+        public ReplicationGroup ReplicationGroup = null;
+        public ReplicationGroup GetReplicationGroup()
+        {
+            return ReplicationGroup;
+        }
+
         [HideInInspector]
         [SerializeField]
         internal uint GlobalObjectIdHash;
@@ -403,9 +411,9 @@ namespace MLAPI
         /// <summary>
         /// Despawns this GameObject and destroys it for other clients. This should be used if the object should be kept on the server
         /// </summary>
-        public void Despawn(bool destroy = false)
+        public void Despawn()
         {
-            NetworkManager.Singleton.SpawnManager.DespawnObject(this, destroy);
+            NetworkManager.Singleton.SpawnManager.DespawnObject(this);
         }
 
 

@@ -355,6 +355,8 @@ namespace MLAPI.Spawning
             {
                 networkObject.InvokeBehaviourNetworkSpawn(null);
             }
+
+            NetworkManager.Singleton.ReplicationManager.HandleSpawn(networkObject);
         }
 
         internal void SendSpawnCallForObject(ulong clientId, NetworkObject networkObject, Stream payload)
@@ -667,6 +669,8 @@ namespace MLAPI.Spawning
             }
 
             var gobj = sobj.gameObject;
+            NetworkObject no = gobj.GetComponent<NetworkObject>();
+            NetworkManager.Singleton.ReplicationManager.HandleDespawn(no);
 
             if (destroyGameObject && gobj != null)
             {
