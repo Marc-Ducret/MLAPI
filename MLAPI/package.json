@@ -1,0 +1,13 @@
+{
+  "name": "io.ducret.mlapi",
+  "version": "0.0.1-preview",
+  "displayName": "MLAPI",
+  "description": "",
+  "unity": "2020.3",
+  "dependencies": {},
+  "author": {
+    "email": "marc.t.ducret@gmail.com",
+    "name": "Marc Ducret",
+    "url": "https://marc.ducret.io/"
+  }
+}

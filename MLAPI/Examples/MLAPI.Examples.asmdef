@@ -1,0 +1,16 @@
+{
+    "name": "MLAPI.Examples",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6566c763e562db4428edc08926326ced"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
