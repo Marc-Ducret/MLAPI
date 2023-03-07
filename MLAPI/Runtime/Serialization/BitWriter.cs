@@ -206,7 +206,7 @@ namespace MLAPI.Serialization
             {
                 if (!((NetworkedObject)value).IsSpawned)
                 {
-                    throw new ArgumentException("BitWriter cannot write NetworkedObject types that are not spawned. GameObject: " + ((GameObject)value).name);
+                    throw new ArgumentException("BitWriter cannot write NetworkedObject types that are not spawned. GameObject: " + ((NetworkedObject)value).name);
                 }
 
                 WriteUInt64Packed(((NetworkedObject)value).NetworkId);
@@ -216,7 +216,7 @@ namespace MLAPI.Serialization
             {
                 if (!((NetworkedBehaviour)value).HasNetworkedObject || !((NetworkedBehaviour)value).NetworkedObject.IsSpawned)
                 {
-                    throw new ArgumentException("BitWriter cannot write NetworkedBehaviour types that are not spawned. GameObject: " + ((GameObject)value).name);
+                    throw new ArgumentException("BitWriter cannot write NetworkedBehaviour types that are not spawned. GameObject: " + ((NetworkedBehaviour)value).name);
                 }
 
                 WriteUInt64Packed(((NetworkedBehaviour)value).NetworkId);
